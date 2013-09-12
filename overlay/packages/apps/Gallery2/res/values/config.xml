@@ -26,4 +26,5 @@
     <bool name="sendMagicSamsungZSLCommand">true</bool>
     <!-- Decode YV16 format on Samsung HDR hardware -->
     <bool name="needsSamsungHDRFormat">true</bool>
+    <bool name="ignorePreferredPreviewSizeForVideo">true</bool>
 </resources>
