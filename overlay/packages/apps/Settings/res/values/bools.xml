@@ -20,5 +20,5 @@
     <bool name="has_powercontrol_widget">true</bool>
 
     <!-- make home button wake configurable in display settings -->
-    <bool name="config_show_homeWake">true</bool>
+    <!--bool name="config_show_homeWake">true</bool-->
 </resources>
