@@ -31,10 +31,13 @@ BOARD_KERNEL_CMDLINE         := androidboot.hardware=qcom user_debug=31 zcache m
 BOARD_KERNEL_BASE            := 0x80200000
 BOARD_MKBOOTIMG_ARGS         := --ramdisk_offset 0x02000000
 BOARD_KERNEL_PAGESIZE        := 2048
-TARGET_KERNEL_VARIANT_CONFIG := cyanogen_jf_defconfig
+TARGET_KERNEL_VARIANT_CONFIG := KT_jf_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := jfselinux_defconfig
 
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
+
+# linaro
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro-4.7-12.10/bin/arm-linux-gnueabihf-
 
 # WiFi module
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
@@ -48,6 +51,10 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
 # Adreno configuration
 BOARD_EGL_CFG := device/samsung/jf-common/configs/egl.cfg
 
+# Adreno
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+HAVE_ADRENO_SOURCE := false
+
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/jf-common/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
@@ -57,6 +64,7 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_FSTAB := device/samsung/jf-common/rootdir/etc/fstab.qcom
+RECOVERY_FSTAB_VERSION := 2
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
@@ -72,10 +80,6 @@ BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 
 # Needed for blobs
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-
-# Adreno
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-HAVE_ADRENO_SOURCE := false
 
 # NFC
 BOARD_NFC_HAL_SUFFIX := msm8960
