@@ -28,4 +28,8 @@ LOCAL_MODULE := lights.msm8960
 
 LOCAL_MODULE_TAGS := optional
 
+ifneq ($(filter jactiveltexx jactivelte,$(TARGET_DEVICE)),)
+LOCAL_CFLAGS := -DJACTIVE
+endif
+
 include $(BUILD_SHARED_LIBRARY)
