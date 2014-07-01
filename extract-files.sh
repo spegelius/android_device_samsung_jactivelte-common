@@ -51,7 +51,7 @@ for FILE in `egrep -v '(^#|^$)' ../$DEVICE/device-proprietary-files.txt`; do
   fi
 done
 
-for FILE in `egrep -v '(^#|^$)' ../jf-common/proprietary-files.txt`; do
+for FILE in `egrep -v '(^#|^$)' ../jactivelte-common/proprietary-files.txt`; do
   echo "Extracting /system/$FILE ..."
   OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
   FILE=${PARSING_ARRAY[0]}
@@ -81,9 +81,9 @@ for FILE in `egrep -v '(^#|^$)' ../jf-common/proprietary-files.txt`; do
   fi
 done
 
-BASE=../../../vendor/$VENDOR/jf-common/proprietary
+BASE=../../../vendor/$VENDOR/jactivelte-common/proprietary
 rm -rf $BASE/*
-for FILE in `egrep -v '(^#|^$)' ../jf-common/common-proprietary-files.txt`; do
+for FILE in `egrep -v '(^#|^$)' ../jactivelte-common/common-proprietary-files.txt`; do
   echo "Extracting /system/$FILE ..."
   OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
   FILE=${PARSING_ARRAY[0]}
@@ -113,4 +113,4 @@ for FILE in `egrep -v '(^#|^$)' ../jf-common/common-proprietary-files.txt`; do
   fi
 done
 
-./../jf-common/setup-makefiles.sh
+./../jactivelte-common/setup-makefiles.sh
