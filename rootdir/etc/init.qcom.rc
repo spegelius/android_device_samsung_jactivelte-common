@@ -141,6 +141,7 @@ on boot
 
     # Allow RIL daemon to assign port open fd_wakelock
     chown system radio /sys/devices/virtual/sec/mdm_hsic_pm/waketime
+    chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
     #To allow interfaces to get v6 address when tethering is enabled
     write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2

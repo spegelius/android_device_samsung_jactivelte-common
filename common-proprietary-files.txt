@@ -1,6 +1,7 @@
 # Bins
 bin/bintvoutservice
 bin/mpdecision
+bin/radish
 #bin/prepare_param.sh
 
 # Thermal
@@ -58,6 +59,7 @@ etc/firmware/vidc_1080p.fw
 
 # Graphics
 lib/libmm-color-convertor.so
+lib/libc2dcolorconvert.so
 
 # Radio
 bin/ds_fmc_appd
@@ -97,10 +99,12 @@ lib/libsecril-client.so
 bin/time_daemon
 lib/libtime_genoff.so
 
-
 # GPS
 vendor/lib/libgeofence.so
+vendor/lib/libizat_core.so
+lib/libgps.utils.so
 lib/libloc_api_v02.so
+lib/libloc_core.so
 
 # Sensors
 #lib/libsensirion_j1.so

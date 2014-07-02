@@ -88,8 +88,13 @@ LocApiAdapter* LocApiAdapter::getLocApiAdapter(LocEng &locEng)
         adapter = new LocApiAdapter(locEng);
     } else {
         getLocApiAdapter_t* getHandle = (getLocApiAdapter_t*)dlsym(handle, "getLocApiAdapter");
-
-        adapter = (*getHandle)(locEng);
+        if (!getHandle) {
+            //adapter = new LocApiAdapter(locEng);
+            LOC_LOGV("LocApiAdapter getLocApiAdapter failed");
+            return NULL;
+        }
+        else
+            adapter = (*getHandle)(locEng);
     }
 
     return adapter;

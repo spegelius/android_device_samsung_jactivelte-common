@@ -170,7 +170,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.omh.enabled=1 \
     persist.data_netmgrd_nint=16 \
     lpa.decode=true \
-    rild.libpath=/system/lib/libsec-ril.so \
+    rild.libpath=/system/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
     ro.cdma.subscribe_on_ruim_ready=true \
     persist.radio.no_wait_for_card=0 \
@@ -187,7 +187,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_2="" \
     persist.rild.nitz_short_ons_3="" \
     ro.telephony.ril.v3=newDriverCall \
-    dalvik.vm.dexopt-data-only=0
+    dalvik.vm.dexopt-data-only=0 \
+    persists.gpsqmienabled=true \
+    ro.qc.sdk.izat.premium_enabled=1 \
+    ro.qc.sdk.izat.service_mask=0x5 \
+    persist.gps.qc_nlp_in_use=0 \
+    persist.sys.camera.transform=0 \
+    persist.sys.camera.connect=0 \
+    persist.sys.videomode=0 \
+    ro.hdmi.enable=true \
+    qcom.hw.aac.encoder=true \
+    ro.streaming.video.drs=true
+
 
 # call common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
