@@ -1,4 +1,5 @@
-# Copyright (c) 2009-2012, Code Aurora Forum. All rights reserved.
+#!/system/bin/sh
+# Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -7,7 +8,7 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of Code Aurora nor
+#     * Neither the name of The Linux Foundation nor
 #       the names of its contributors may be used to endorse or promote
 #       products derived from this software without specific prior written
 #       permission.
@@ -25,19 +26,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-on boot
-
-# permissions for bluetooth.
-    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown bluetooth net_bt_stack /dev/ttyHS0
-    chmod 0660 /dev/ttyHS0
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
-
-
-	chown radio system /sys/class/sec/switch/usb_sel
-	chown radio system /sys/class/sec/switch/usb_state
-	chown radio system /sys/class/sec/switch/uart_sel
-	chown radio system /sys/class/sec/switch/apo_factory
+country=`getprop wlan.crda.country`
+# crda takes input in COUNTRY environment variable
+if [ $country != "" ]
+then
+COUNTRY="$country" /system/bin/crda
+fi
