@@ -21,10 +21,13 @@
      for different hardware and product builds. -->
 <resources>
 
+    <!-- Control whether being in the desk dock should enable accelerometer
+         based screen orientation.  This defaults to true because it is
+         common for desk docks to be sold in a variety of form factors
+         with different orientations.  Since we cannot always tell these docks
+         apart and the docks cannot report their true orientation on their own,
+         we rely on gravity to determine the effective orientation. -->
     <bool name="config_deskDockEnablesAccelerometer">false</bool>
-
-    <!-- Default color for notification LED is white. -->
-    <color name="config_defaultNotificationColor">#ffffffff</color>
 
     <!-- Default value for led color when battery is medium charged -->
     <!-- The green LED is brighter than red, bias closer to yellow. -->
@@ -47,6 +50,7 @@
         <item>15</item>
         <item>150</item>
         <item>1000</item>
+        <item>2000</item>
         <item>5000</item>
     </integer-array>
 
@@ -57,8 +61,9 @@
     <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>20</item>
         <item>80</item>
-        <item>130</item>
-        <item>190</item>
+        <item>110</item>
+        <item>180</item>
+        <item>220</item>
         <item>255</item>
     </integer-array>
 
@@ -69,9 +74,10 @@
     <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>1</item>
         <item>1</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
     </integer-array>
 
 
@@ -88,23 +94,6 @@
 
     <!-- XXXXX NOTE THE FOLLOWING RESOURCES USE THE WRONG NAMING CONVENTION.
          Please don't copy them, copy anything else. -->
-
-    <!-- An Array of "[Connection name],[ConnectivityManager.TYPE_xxxx],
-         [associated radio-type],[priority],[restoral-timer(ms)],[dependencyMet]  -->
-    <!-- the 5th element "resore-time" indicates the number of milliseconds to delay
-         before automatically restore the default connection.  Set -1 if the connection
-         does not require auto-restore. -->
-    <!-- the 6th element indicates boot-time dependency-met value. -->
-    <string-array translatable="false" name="networkAttributes">
-        <item>"wifi,1,1,1,-1,true"</item>
-        <item>"mobile,0,0,0,-1,true"</item>
-        <item>"mobile_mms,2,0,2,180000,true"</item>
-        <item>"mobile_supl,3,0,2,60000,true"</item>
-        <item>"mobile_dun,4,0,2,60000,true"</item>
-        <item>"mobile_hipri,5,0,3,60000,true"</item>
-        <item>"mobile_bluetooth,7,7,2,-1,true"</item>
-        <item>"wifi_p2p,13,1,0,-1,true"</item>
-    </string-array>
 
     <!-- An Array of "[ConnectivityManager connectionType],
          [# simultaneous connection types]"  -->
