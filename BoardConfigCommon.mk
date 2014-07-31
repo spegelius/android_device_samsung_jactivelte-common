@@ -37,8 +37,12 @@ TARGET_KERNEL_SELINUX_CONFIG := jfselinux_defconfig
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
 # WiFi module
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
+BOARD_HAVE_SAMSUNG_WIFI := true
+WIFI_BAND := 802_11_ABG
+WIFI_DRIVER_MODULE_AP_ARG := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_MODULE_NAME := "dhd"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
 
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
@@ -76,6 +80,9 @@ COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 # Adreno
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE := false
+
+# GPS
+BOARD_HAVE_NEW_QC_GPS := true
 
 # NFC
 BOARD_NFC_HAL_SUFFIX := msm8960
