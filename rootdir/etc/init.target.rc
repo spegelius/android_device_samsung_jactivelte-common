@@ -199,6 +199,10 @@ on post-fs-data
     chown system radio /sys/class/host_notify/usb_otg/booster
     chmod 0660 /sys/class/host_notify/usb_otg/booster
 
+    # Set these so we can remotely update SELinux policy
+    chown system system /sys/fs/selinux/load
+    chown system system /sys/fs/selinux/enforce
+
     # Permissions for Led
     chown system system /sys/class/sec/led/led_r
     chown system system /sys/class/sec/led/led_g
