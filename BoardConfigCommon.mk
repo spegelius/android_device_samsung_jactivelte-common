@@ -48,6 +48,8 @@ WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
+# Use CAF media driver variant for 8960
+TARGET_QCOM_MEDIA_VARIANT := caf
 
 # Adreno configuration
 BOARD_EGL_CFG := device/samsung/jactivelte-common/configs/egl.cfg
@@ -110,6 +112,9 @@ BOARD_USES_SEPERATED_HEADSET_MIC := true
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
+
+# Triple famebuffers
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Camera
 TARGET_NEED_CAMERA_ZSL := true
