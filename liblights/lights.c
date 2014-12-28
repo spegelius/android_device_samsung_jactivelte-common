@@ -32,9 +32,7 @@ static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
 char const*const PANEL_FILE = "/sys/class/leds/lcd-backlight/brightness";
-#if !defined(JACTIVE)
 char const*const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
-#endif
 
 char const*const LED_BLINK = "/sys/class/sec/led/led_blink";
 
@@ -153,7 +151,6 @@ static int set_light_backlight(struct light_device_t *dev,
     return err;
 }
 
-#if !defined(JACTIVE)
 static int
 set_light_buttons(struct light_device_t* dev,
         struct light_state_t const* state)
@@ -168,7 +165,6 @@ set_light_buttons(struct light_device_t* dev,
     return err;
 
 }
-#endif
 
 static int close_lights(struct light_device_t *dev)
 {
@@ -322,10 +318,8 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 
     if (0 == strcmp(LIGHT_ID_BACKLIGHT, name))
         set_light = set_light_backlight;
-#if !defined(JACTIVE)
     else if (0 == strcmp(LIGHT_ID_BUTTONS, name))
         set_light = set_light_buttons;
-#endif
     else if (0 == strcmp(LIGHT_ID_BATTERY, name))
         set_light = set_light_leds_battery;
     else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
@@ -360,7 +354,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_major = 1,
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
-    .name = "D2 Lights Module",
+    .name = "JF Lights Module",
     .author = "The CyanogenMod Project",
     .methods = &lights_module_methods,
 };
