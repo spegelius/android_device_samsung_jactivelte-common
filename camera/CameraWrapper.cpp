@@ -107,16 +107,17 @@ static char * camera_fixup_getparams(int id, const char * settings)
     params.unflatten(android::String8(settings));
 
     // fix params here
-    params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
-    params.set(android::CameraParameters::KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO, "1920x1080");
+    //params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
+    //params.set(android::CameraParameters::KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO, "1920x1080");
 
     /* Enforce video-snapshot-supported to true */
-    params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
+    //params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 
     ALOGD("%s: get parameters fixed up", __FUNCTION__);
+    ALOGV("zsl: %s", params.get("zsl"));
     return ret;
 }
 
@@ -125,42 +126,42 @@ char * camera_fixup_setparams(struct camera_device * device, const char * settin
     int id = CAMERA_ID(device);
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
-    const char KEY_SAMSUNG_CAMERA_MODE[] = "cam_mode";
-    const char* camMode = params.get(KEY_SAMSUNG_CAMERA_MODE);
+    //const char KEY_SAMSUNG_CAMERA_MODE[] = "cam_mode";
+    //const char* camMode = params.get(KEY_SAMSUNG_CAMERA_MODE);
 
-    bool enableZSL = !strcmp(params.get(android::CameraParameters::KEY_ZSL), "on");
+    //bool enableZSL = !strcmp(params.get(android::CameraParameters::KEY_ZSL), "on");
 
     // jactive device camera don't seem to have recording hint param, so read it safely
-    const char* recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
-    bool isVideo = false;
-    if (recordingHint)
-        isVideo = !strcmp(recordingHint, "true");
+    //const char* recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
+    //bool isVideo = false;
+    //if (recordingHint)
+    //    isVideo = !strcmp(recordingHint, "true");
 
     // fix params here
     // No need to fix-up ISO_HJR, it is the same for userspace and the camera lib
-    if(params.get("iso")) {
-        const char* isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
-        if(strcmp(isoMode, "ISO100") == 0)
-            params.set(android::CameraParameters::KEY_ISO_MODE, "100");
-        else if(strcmp(isoMode, "ISO200") == 0)
-            params.set(android::CameraParameters::KEY_ISO_MODE, "200");
-        else if(strcmp(isoMode, "ISO400") == 0)
-            params.set(android::CameraParameters::KEY_ISO_MODE, "400");
-        else if(strcmp(isoMode, "ISO800") == 0)
-            params.set(android::CameraParameters::KEY_ISO_MODE, "800");
-        else if(strcmp(isoMode, "ISO1600") == 0)
-            params.set(android::CameraParameters::KEY_ISO_MODE, "1600");
-    }
+    //if(params.get("iso")) {
+    //    const char* isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
+    //    if(strcmp(isoMode, "ISO100") == 0)
+    //        params.set(android::CameraParameters::KEY_ISO_MODE, "100");
+    //    else if(strcmp(isoMode, "ISO200") == 0)
+    //        params.set(android::CameraParameters::KEY_ISO_MODE, "200");
+    //    else if(strcmp(isoMode, "ISO400") == 0)
+    //        params.set(android::CameraParameters::KEY_ISO_MODE, "400");
+    //    else if(strcmp(isoMode, "ISO800") == 0)
+    //        params.set(android::CameraParameters::KEY_ISO_MODE, "800");
+    //    else if(strcmp(isoMode, "ISO1600") == 0)
+    //        params.set(android::CameraParameters::KEY_ISO_MODE, "1600");
+    //}
 
-    if (id != 1) {
-        params.set(android::CameraParameters::KEY_ZSL, isVideo ? "off" : "on");
-        params.set(android::CameraParameters::KEY_CAMERA_MODE, isVideo ? "0" : "1");
+    //if (id != 1) {
+    //    params.set(android::CameraParameters::KEY_ZSL, isVideo ? "off" : "on");
+    //    params.set(android::CameraParameters::KEY_CAMERA_MODE, isVideo ? "0" : "1");
 
-        if (!isVideo) {
-            // Magic 1508 command needs to be sent for jf
-            camera_send_command(device, 1508, 0, 0);
-        }
-    }
+    //    if (!isVideo) {
+    //        // Magic 1508 command needs to be sent for jf
+    //        camera_send_command(device, 1508, 0, 0);
+    //    }
+    //}
 
     android::String8 strParams = params.flatten();
 
@@ -208,6 +209,7 @@ void camera_enable_msg_type(struct camera_device * device, int32_t msg_type)
 {
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device, (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
     ALOGV("%s", __FUNCTION__);
+    ALOGV("%x", msg_type);
 
     if(!device)
         return;
@@ -219,6 +221,7 @@ void camera_disable_msg_type(struct camera_device * device, int32_t msg_type)
 {
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device, (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
     ALOGV("%s", __FUNCTION__);
+    ALOGV("%x", msg_type);
 
     if(!device)
         return;
@@ -439,6 +442,9 @@ int camera_send_command(struct camera_device * device,
     if(!device)
         return -EINVAL;
 
+	ALOGV("%x", cmd);
+	ALOGV("%x", arg1);
+	ALOGV("%x", arg2);
     return VENDOR_CALL(device, send_command, cmd, arg1, arg2);
 }
 
